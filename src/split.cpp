@@ -202,7 +202,7 @@ void split(vector <int> T, vector <int> &T_vehicle, vector <int> &T_drone, int n
     
     Label tmp = ListOfLabel[n+1][best_LabelIndex];
  
-    i = n +1;
+    i = n + 1;
     int j = 0;
     bool stop_check;
     while (i >= 1) {

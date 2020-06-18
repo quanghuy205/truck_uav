@@ -243,10 +243,46 @@ void TSPalgorithm::Split()
     pair<pair<double,double>, int> BestLabel;
     BestLabel = List.findBestLabel();
     cout << "Best Label: " << "(" << BestLabel.first.first << "," << BestLabel.first.second << ")";
-   
+
+    // decomposition to assign customer sequence to T_vehicle and T_drone
+    int BestLabelIndex = BestLabel.second;
+    pair <double,double> tmp = List.ListOfLabel.at(n+1).at(BestLabelIndex);
  
-    // pair <pair<double,double>, int > BestLabel = ListUB2.findBestLabel();
-    // UB2 = max (BestLabel.first.first,BestLabel.first.second);
+    i = n + 1;
+    int j = 0;
+    bool stop_check;
+    while (i >= 1) {
+        j = i - 1;
+        stop_check = false;
+            while (!stop_check) {
+                if (List.ListOfLabel.at(j).empty()) {
+                    T_drone.cities.push_back(T.cities.at(j));
+                    j--;
+                } else {
+                    for (int v = 0; v < List.ListOfLabel.at(j).size(); v++) {
+                        if (tmp.first == List.ListOfLabel.at(j).at(v).first + matrix.TestDistance(T.cities.at(j),
+                   T.cities.at(i)) && tmp.second == List.ListOfLabel.at(j).at(v).second + CalDroneCost(j,i)) {
+                            tmp.first = List.ListOfLabel.at(j).at(v).first;
+                            tmp.second = List.ListOfLabel.at(j).at(v).second;
+                            if ( j != 0) {
+                                T_vehicle.cities.push_back(T.cities.at(j));
+                            }                            
+                            stop_check = true;
+                        }                    
+                    }
+                    if (!stop_check) {
+                        T_drone.cities.push_back(T.cities.at(j));
+                        j--;
+                    }
+                }
+            }    
+        i = j;
+    }
+     
+    reverse(T_vehicle.cities.begin(),T_vehicle.cities.end());
+    reverse(T_drone.cities.begin(),T_drone.cities.end());
+    T_vehicle.printTour();
+    T_drone.printTour();
 }
 void TSPalgorithm::Optimize()
 {	

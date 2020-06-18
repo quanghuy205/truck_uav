@@ -1,0 +1,37 @@
+[
+{
+  "directory": "/home/quanghuy205/test/build",
+  "command": "/usr/bin/c++   -I/home/quanghuy205/test/includes  -g   -std=gnu++11 -o CMakeFiles/main.dir/src/CoordMatrix.cpp.o -c /home/quanghuy205/test/src/CoordMatrix.cpp",
+  "file": "/home/quanghuy205/test/src/CoordMatrix.cpp"
+},
+{
+  "directory": "/home/quanghuy205/test/build",
+  "command": "/usr/bin/c++   -I/home/quanghuy205/test/includes  -g   -std=gnu++11 -o CMakeFiles/main.dir/src/Label.cpp.o -c /home/quanghuy205/test/src/Label.cpp",
+  "file": "/home/quanghuy205/test/src/Label.cpp"
+},
+{
+  "directory": "/home/quanghuy205/test/build",
+  "command": "/usr/bin/c++   -I/home/quanghuy205/test/includes  -g   -std=gnu++11 -o CMakeFiles/main.dir/src/Solution.cpp.o -c /home/quanghuy205/test/src/Solution.cpp",
+  "file": "/home/quanghuy205/test/src/Solution.cpp"
+},
+{
+  "directory": "/home/quanghuy205/test/build",
+  "command": "/usr/bin/c++   -I/home/quanghuy205/test/includes  -g   -std=gnu++11 -o CMakeFiles/main.dir/src/TSPalgorithm.cpp.o -c /home/quanghuy205/test/src/TSPalgorithm.cpp",
+  "file": "/home/quanghuy205/test/src/TSPalgorithm.cpp"
+},
+{
+  "directory": "/home/quanghuy205/test/build",
+  "command": "/usr/bin/c++   -I/home/quanghuy205/test/includes  -g   -std=gnu++11 -o CMakeFiles/main.dir/src/list_customers.cpp.o -c /home/quanghuy205/test/src/list_customers.cpp",
+  "file": "/home/quanghuy205/test/src/list_customers.cpp"
+},
+{
+  "directory": "/home/quanghuy205/test/build",
+  "command": "/usr/bin/c++   -I/home/quanghuy205/test/includes  -g   -std=gnu++11 -o CMakeFiles/main.dir/src/main.cpp.o -c /home/quanghuy205/test/src/main.cpp",
+  "file": "/home/quanghuy205/test/src/main.cpp"
+},
+{
+  "directory": "/home/quanghuy205/test/build",
+  "command": "/usr/bin/c++   -I/home/quanghuy205/test/includes  -g   -std=gnu++11 -o CMakeFiles/main.dir/src/split.cpp.o -c /home/quanghuy205/test/src/split.cpp",
+  "file": "/home/quanghuy205/test/src/split.cpp"
+}
+]

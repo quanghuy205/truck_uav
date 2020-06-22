@@ -128,5 +128,9 @@ pair <pair<double,double>, int>  ListLabel::findBestLabel()
     return make_pair(bestLabel,bestLabelIndex);
 }
 
+void ListLabel::Reset()
+{
+    vector <vector <pair<double,double>>> ().swap(ListOfLabel); 
+}
 
 

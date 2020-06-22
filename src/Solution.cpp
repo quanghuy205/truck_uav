@@ -16,19 +16,23 @@ Solution::~Solution(void)
 }
 
 
-bool Solution::isBetterSolution(Solution A, Solution B)
+bool Solution::isBetterSolution(Solution& B)
 {   
-    double CostOfA = max(A.VehicleCost(),A.DroneCost());
+    double CostOfA = max(VehicleCost(),DroneCost());
     double CostOfB = max(B.VehicleCost(), B.DroneCost());
 
-    if ((CostOfA < CostOfB) ||( (CostOfA == CostOfB) && (min(A.VehicleCost(),A.DroneCost()) < min(B.VehicleCost(), B.DroneCost())))) return true;
+    if ((CostOfA < CostOfB) ||( (CostOfA == CostOfB) && (min(VehicleCost(),DroneCost()) < min(B.VehicleCost(), B.DroneCost())))) return true;
     else return false;
 }
 
 double Solution::VehicleCost()
-{
-    return VehicleTour.Tour_VehicleCost();
-
+{   
+    VehicleTour.cities.insert(VehicleTour.cities.begin(),0);
+    VehicleTour.cities.push_back(0);
+    double cost =  VehicleTour.Tour_VehicleCost();
+    VehicleTour.cities.erase(VehicleTour.cities.begin());
+    VehicleTour.cities.pop_back();
+    return cost;
 }
 
 double Solution::DroneCost()
@@ -41,4 +45,18 @@ double Solution::DroneCost()
     }
 
     return *std::max_element(DronCostVect.begin(),DronCostVect.end());
+}
+
+
+double Solution::Cost()
+{
+    return max(VehicleCost(),DroneCost());
+}
+void Solution::Reset()
+{
+    std::vector <int> ().swap(VehicleTour.cities);
+    for (int i = 0; i < DroneTour.size(); i++)
+    {
+        std::vector <int> ().swap(DroneTour.at(i).cities);
+    }
 }

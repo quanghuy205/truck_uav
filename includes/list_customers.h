@@ -31,7 +31,8 @@ public:
     bool check_all_visited(int& n, vector <int> visited);
     int find_nearest_neighbour(int& n, vector <int> visited, int& current_vertex);
     void GetNearestNeighbourTour();
-
+    
+    
 private:
 //	std::vector< int > cities;
 	CoordMatrix* matrix;

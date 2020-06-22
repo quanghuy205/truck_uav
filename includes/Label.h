@@ -29,7 +29,7 @@ public:
     int dominance (pair <double,double>&  A, pair <double,double>&  B);
 
     void removeLabel(const int & ListIndex, const int& LabelIndex);
-    
+    void Reset();
     pair <pair<double,double>, int> findBestLabel();
     private:
     

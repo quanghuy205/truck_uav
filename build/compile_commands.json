@@ -6,6 +6,16 @@
 },
 {
   "directory": "/home/quanghuy205/test/build",
+  "command": "/usr/bin/c++   -I/home/quanghuy205/test/includes  -g   -std=gnu++11 -o CMakeFiles/main.dir/src/LKMatrix.cpp.o -c /home/quanghuy205/test/src/LKMatrix.cpp",
+  "file": "/home/quanghuy205/test/src/LKMatrix.cpp"
+},
+{
+  "directory": "/home/quanghuy205/test/build",
+  "command": "/usr/bin/c++   -I/home/quanghuy205/test/includes  -g   -std=gnu++11 -o CMakeFiles/main.dir/src/LPT.cpp.o -c /home/quanghuy205/test/src/LPT.cpp",
+  "file": "/home/quanghuy205/test/src/LPT.cpp"
+},
+{
+  "directory": "/home/quanghuy205/test/build",
   "command": "/usr/bin/c++   -I/home/quanghuy205/test/includes  -g   -std=gnu++11 -o CMakeFiles/main.dir/src/Label.cpp.o -c /home/quanghuy205/test/src/Label.cpp",
   "file": "/home/quanghuy205/test/src/Label.cpp"
 },

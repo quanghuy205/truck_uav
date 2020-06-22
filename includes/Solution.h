@@ -15,9 +15,11 @@ public:
     ~Solution(void);
     ListOfCustomers VehicleTour;
     vector <ListOfCustomers> DroneTour; 
-    bool isBetterSolution(Solution A,Solution B);
+    bool isBetterSolution(Solution& B);
     double VehicleCost();
     double DroneCost();
-};
+    double Cost();
+    void Reset();
+}; 
 
 #endif

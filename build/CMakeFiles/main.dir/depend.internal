@@ -4,6 +4,12 @@
 CMakeFiles/main.dir/src/CoordMatrix.cpp.o
  ../includes/CoordMatrix.h
  /home/quanghuy205/test/src/CoordMatrix.cpp
+CMakeFiles/main.dir/src/LKMatrix.cpp.o
+ ../includes/LKMatrix.h
+ /home/quanghuy205/test/src/LKMatrix.cpp
+CMakeFiles/main.dir/src/LPT.cpp.o
+ ../includes/LPT.h
+ /home/quanghuy205/test/src/LPT.cpp
 CMakeFiles/main.dir/src/Label.cpp.o
  ../includes/CoordMatrix.h
  ../includes/Label.h
@@ -16,6 +22,8 @@ CMakeFiles/main.dir/src/Solution.cpp.o
  /home/quanghuy205/test/src/Solution.cpp
 CMakeFiles/main.dir/src/TSPalgorithm.cpp.o
  ../includes/CoordMatrix.h
+ ../includes/LKMatrix.h
+ ../includes/LPT.h
  ../includes/Label.h
  ../includes/Solution.h
  ../includes/TSPalgorithm.h
@@ -27,6 +35,8 @@ CMakeFiles/main.dir/src/list_customers.cpp.o
  /home/quanghuy205/test/src/list_customers.cpp
 CMakeFiles/main.dir/src/main.cpp.o
  ../includes/CoordMatrix.h
+ ../includes/LKMatrix.h
+ ../includes/LPT.h
  ../includes/Label.h
  ../includes/Solution.h
  ../includes/TSPalgorithm.h

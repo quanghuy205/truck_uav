@@ -11,7 +11,7 @@ int main() {
     
  // test.CreateTestSolution();
  //test.CreateSolution();
-  test.Optimize();
+  test.MainAlgorithm();
 
     
 }

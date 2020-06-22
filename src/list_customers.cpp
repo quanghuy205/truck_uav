@@ -54,7 +54,7 @@ double ListOfCustomers::DroneDistance(const int& c) const
 double ListOfCustomers::Tour_VehicleCost()
 {
     double cost = 0.0;
-
+    
 	int size = (int) cities.size();
 	int c1, c2;
 
@@ -69,8 +69,8 @@ double ListOfCustomers::Tour_VehicleCost()
 	c1 = cities.at( size - 1 );
 	c2 = cities.at( 0 );
 	cost += VehicleDistance( c1, c2 );
-
 	return cost;
+
 }
 
 double ListOfCustomers::Tour_DroneCost()
@@ -96,11 +96,12 @@ void ListOfCustomers::Reset()
 
 void ListOfCustomers::printTour() 
 {
-	cout << "Tour: " ;
+	
 	for (int i = 0; i < cities.size(); i++) 
 	{
 		cout  << cities.at(i) << " ";
-	}	
+	}
+    cout << endl;	
 }
 
 

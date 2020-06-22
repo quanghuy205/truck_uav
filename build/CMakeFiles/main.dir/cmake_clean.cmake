@@ -1,5 +1,7 @@
 file(REMOVE_RECURSE
   "CMakeFiles/main.dir/src/CoordMatrix.cpp.o"
+  "CMakeFiles/main.dir/src/LKMatrix.cpp.o"
+  "CMakeFiles/main.dir/src/LPT.cpp.o"
   "CMakeFiles/main.dir/src/Label.cpp.o"
   "CMakeFiles/main.dir/src/Solution.cpp.o"
   "CMakeFiles/main.dir/src/TSPalgorithm.cpp.o"

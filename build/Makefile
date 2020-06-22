@@ -150,6 +150,60 @@ src/CoordMatrix.cpp.s:
 	$(MAKE) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/src/CoordMatrix.cpp.s
 .PHONY : src/CoordMatrix.cpp.s
 
+src/LKMatrix.o: src/LKMatrix.cpp.o
+
+.PHONY : src/LKMatrix.o
+
+# target to build an object file
+src/LKMatrix.cpp.o:
+	$(MAKE) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/src/LKMatrix.cpp.o
+.PHONY : src/LKMatrix.cpp.o
+
+src/LKMatrix.i: src/LKMatrix.cpp.i
+
+.PHONY : src/LKMatrix.i
+
+# target to preprocess a source file
+src/LKMatrix.cpp.i:
+	$(MAKE) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/src/LKMatrix.cpp.i
+.PHONY : src/LKMatrix.cpp.i
+
+src/LKMatrix.s: src/LKMatrix.cpp.s
+
+.PHONY : src/LKMatrix.s
+
+# target to generate assembly for a file
+src/LKMatrix.cpp.s:
+	$(MAKE) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/src/LKMatrix.cpp.s
+.PHONY : src/LKMatrix.cpp.s
+
+src/LPT.o: src/LPT.cpp.o
+
+.PHONY : src/LPT.o
+
+# target to build an object file
+src/LPT.cpp.o:
+	$(MAKE) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/src/LPT.cpp.o
+.PHONY : src/LPT.cpp.o
+
+src/LPT.i: src/LPT.cpp.i
+
+.PHONY : src/LPT.i
+
+# target to preprocess a source file
+src/LPT.cpp.i:
+	$(MAKE) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/src/LPT.cpp.i
+.PHONY : src/LPT.cpp.i
+
+src/LPT.s: src/LPT.cpp.s
+
+.PHONY : src/LPT.s
+
+# target to generate assembly for a file
+src/LPT.cpp.s:
+	$(MAKE) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/src/LPT.cpp.s
+.PHONY : src/LPT.cpp.s
+
 src/Label.o: src/Label.cpp.o
 
 .PHONY : src/Label.o
@@ -324,6 +378,12 @@ help:
 	@echo "... src/CoordMatrix.o"
 	@echo "... src/CoordMatrix.i"
 	@echo "... src/CoordMatrix.s"
+	@echo "... src/LKMatrix.o"
+	@echo "... src/LKMatrix.i"
+	@echo "... src/LKMatrix.s"
+	@echo "... src/LPT.o"
+	@echo "... src/LPT.i"
+	@echo "... src/LPT.s"
 	@echo "... src/Label.o"
 	@echo "... src/Label.i"
 	@echo "... src/Label.s"

@@ -31,7 +31,18 @@ void TSPalgorithm::Initialize( //const int& iter,
 	// Set the matrix pointer for Tour object
 	T.SetMatrix( mat );
     T_drone.SetMatrix(mat);
-    
+    T_opt_vehicle.SetMatrix(mat);
+    T_opt_drone.resize(m);
+    Sol.DroneTour.resize(m);
+    Sol.VehicleTour.SetMatrix(mat);
+    BestSol.DroneTour.resize(m);
+    BestSol.VehicleTour.SetMatrix(mat);
+    for (int i = 0; i < m; i++)
+    {
+        T_opt_drone.at(i).SetMatrix(mat);
+        Sol.DroneTour.at(i).SetMatrix(mat);
+        BestSol.DroneTour.at(i).SetMatrix(mat);
+    }
 
 	
 	//iterations = iter;
@@ -99,14 +110,14 @@ void TSPalgorithm::UB2Cal()
   
 
 
-   for (int i = 1; i <= n + 1; i++)
-   {
-       for (int j = 0; j < i; j++) 
-       {
-           if (valid_arc(j,i))
-           cout << T.cities.at(j) << " " << T.cities.at(i) << endl;
-       }
-   }
+//    for (int i = 1; i <= n + 1; i++)
+//    {
+//        for (int j = 0; j < i; j++) 
+//        {
+//            if (valid_arc(j,i))
+//            cout << T.cities.at(j) << " " << T.cities.at(i) << endl;
+//        }
+//    }
   
 
     int i = 0;
@@ -126,7 +137,7 @@ void TSPalgorithm::UB2Cal()
             }       
         }        
     }
-    
+    cout << "List UB2: " << endl;
     ListUB2.print();
    
     pair <pair<double,double>, int > BestLabel = ListUB2.findBestLabel();
@@ -134,7 +145,8 @@ void TSPalgorithm::UB2Cal()
 } 
 
 void TSPalgorithm::UB3Cal()
-{
+{   
+    
     int i = 0;
     pair <double, double> p_UB3;                   
     p_UB3.first = 0.0;
@@ -206,7 +218,7 @@ void TSPalgorithm::LB_totCal()
 
 }
 
-void TSPalgorithm::Split()
+void TSPalgorithm::DynamicProgramming()
 {
     
     std::pair <double,double> temp;
@@ -237,12 +249,12 @@ void TSPalgorithm::Split()
             }       
         }        
     }
-
-       List.print();
+    cout << endl << "List Of Labels: " << endl;
+    List.print();
    
     pair<pair<double,double>, int> BestLabel;
     BestLabel = List.findBestLabel();
-    cout << "Best Label: " << "(" << BestLabel.first.first << "," << BestLabel.first.second << ")";
+    cout << "Best Label: " << "(" << BestLabel.first.first << "," << BestLabel.first.second << ")" << endl;
 
     // decomposition to assign customer sequence to T_vehicle and T_drone
     int BestLabelIndex = BestLabel.second;
@@ -281,28 +293,48 @@ void TSPalgorithm::Split()
      
     reverse(T_vehicle.cities.begin(),T_vehicle.cities.end());
     reverse(T_drone.cities.begin(),T_drone.cities.end());
-    T_vehicle.printTour();
-    T_drone.printTour();
-}
-void TSPalgorithm::Optimize()
-{	
-    matrix.CreateTestCostMatrix();
-    Initialize(&matrix);
-    T.cities.push_back(0);
-    T.cities.push_back(1);
-    T.cities.push_back(2);
-    T.cities.push_back(3);
-    T.cities.push_back(4);
-    T.cities.push_back(5);
-   T.cities.push_back(0);
 
-  //  T.GetNearestNeighbourTour();
-   
-  //  T.printTour();
-   cout << T.Tour_VehicleCost();
-   UB2Cal();
+}
+
+
+void TSPalgorithm::ReOptimizeVehicle()
+{
+    //ReOptimize T_vehicle
+    cout << "----------------------------\n";
+    cout << "reoptimize(T_vehicle) " << endl;
+    cout << "T_opt_vehicle: ";
+     
+    LKMatrix mat( matrix.VehicleCost, T_vehicle.cities);
+    mat.optimizeTour();
+    mat.printTourIds(T_opt_vehicle.cities);    
+}
+void TSPalgorithm::ReOptimizeDrone()
+{
+    //ReOptimize T_drone
+    cout << endl << "----------------------------\n";
+    cout << "ReoptimizePMS(T_drone) " << endl << "T_opt_drone: " << endl;   
+       
+    if (!T_drone.cities.empty())
+    {
+        optimizePMS(T_opt_drone_vect, T_drone.cities, matrix.VehicleCost, matrix.DroneCost, m);
+    }
+    
+    for (int i = 0; i < m; i++)
+    {
+        T_opt_drone.at(i).cities = T_opt_drone_vect.at(i);
+        T_opt_drone.at(i).printTour();
+    }
+     cout << endl << "----------------------------\n";
+}
+void TSPalgorithm::Split()
+{	
+    cout << "Split: " << endl;
+    //cout << T.Tour_VehicleCost();
+    cout << "UB1 = " << UB1 << endl;
+    UB2Cal();
 
     cout << "UB2 = " << UB2 << endl;
+    cout << "UB3 List" << endl;
     UB3Cal();
     cout << "UB3 = " << UB3 << endl;
     LB_vehCal();
@@ -311,14 +343,139 @@ void TSPalgorithm::Optimize()
     UB = min(min(UB1,UB2),UB3);
     cout << endl;
     cout << "UB = " << UB << endl;
+  
+    DynamicProgramming();
 
-    Split();
+    cout << "T_Vehicle: ";
+    T_vehicle.printTour();
+    cout  << "T_Drone: ";
+    T_drone.printTour();
 
+
+    // //Update Solution
+    // Sol.push_back(T_opt_vehicle);
+        
+    // for(int i = 0; i < T_opt_drone.size(); i++) {
+    //     Sol.push_back(T_opt_drone.at(i));
+    // }
 } 
 
+void TSPalgorithm::BestInsertion() {
+    double minCost;
+    int minIndex;
+    T.cities.clear();
+    T = T_opt_vehicle;
 
-void TSPalgorithm::Test()
+    if (BestSol.DroneTour.empty()) return;
+    
+    for (int i = 0; i < T_opt_drone.size(); i++) {
+        for (int j = 0; j < T_opt_drone.at(i).cities.size(); j++) {
+            T.cities.insert(T.cities.begin(), T_opt_drone.at(i).cities.at(j));
+            minCost = T.Tour_VehicleCost();
+            minIndex = 0;
+            T.cities.erase(T.cities.begin());
+
+            for (int k = 1; k <= T.cities.size(); k++) {
+                T.cities.insert(T.cities.begin() + k, T_opt_drone.at(i).cities.at(j));
+                if (minCost > T.Tour_VehicleCost()) {
+                    minCost = T.Tour_VehicleCost();
+                    minIndex = k;
+                }
+                T.cities.erase(T.cities.begin() + k);
+            }
+            
+            T.cities.insert(T.cities.begin() + minIndex,T_opt_drone.at(i).cities.at(j));
+            
+        }   
+    }
+    T.cities.push_back(0);
+    T.cities.insert(T.cities.begin(),0);
+
+}
+
+void TSPalgorithm::MainAlgorithm()
 {
+    //Init
+    matrix.CreateTestCostMatrix();
+    Initialize(&matrix);
+    T.cities.push_back(0);
+    T.cities.push_back(1);
+    T.cities.push_back(2);
+    T.cities.push_back(3);
+    T.cities.push_back(4);
+    T.cities.push_back(5);
+    T.cities.push_back(0);
+
+    
+  //  T.GetNearestNeighbourTour();
+   
+  //  T.printTour();
+
+    bool BestSolIsImproved = true;
+
+    BestSol.VehicleTour.cities = T.cities;
+
+    BestCost = BestSol.Cost();
+    
+    cout << "Init Tour: " << endl;
+    T.printTour();
+    int Iter = 1;
+    while(BestSolIsImproved)
+    {   
+        cout << "Iteration: " << Iter << endl;
+        Iter++;
+
+        Split();
+    
+        ReOptimizeVehicle();
+    
+        ReOptimizeDrone();
+
+        //Update Solution
+        Sol.VehicleTour = T_opt_vehicle;
+        Sol.DroneTour = T_opt_drone;
+   
+       
+        if (Sol.isBetterSolution(BestSol))
+        {   
+            cout << "bestSol is improved, Update BestSolution and Split again" << endl;
+            BestSol = Sol;
+            BestCost = BestSol.Cost();
+            BestInsertion();
+            cout << "Best Insertion: " << endl;
+            T.printTour();
+        } else
+        {
+            cout << "BestSol is not improved, Print Final Solution: " << endl;
+            BestSolIsImproved  = false;
+            BestCost = BestSol.Cost();
+            cout << "Vehicle Tour: ";
+            BestSol.VehicleTour.printTour();
+            cout << "Drone Tour: " << endl;
+            for (int i = 0; i < m; i++)
+            {
+                BestSol.DroneTour.at(i).printTour();
+            }
+            cout << endl << "Final Cost: " << BestSol.Cost() << endl;
+
+        }
+        
+        UB1 = BestCost;
+        List.Reset();
+        Sol.Reset();
+   
+        T_drone.Reset();
+        T_vehicle.Reset();
+        for (int i = 0; i < T_opt_drone.size(); i++)
+        {
+            T_opt_drone.at(i).Reset();
+            T_opt_drone_vect.at(i).clear();
+        }
+        T_opt_vehicle.Reset();
+    }
+
+
+
 
 }
 

@@ -27,14 +27,13 @@ bool Solution::isBetterSolution(Solution& B)
 
 double Solution::VehicleCost()
 {   
-    VehicleTour.cities.insert(VehicleTour.cities.begin(),0);
-    VehicleTour.cities.push_back(0);
+    
+    
     double cost =  VehicleTour.Tour_VehicleCost();
-    VehicleTour.cities.erase(VehicleTour.cities.begin());
-    VehicleTour.cities.pop_back();
+  
     return cost;
+   
 }
-
 double Solution::DroneCost()
 {
     vector <double> DronCostVect;

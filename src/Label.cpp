@@ -69,19 +69,29 @@ void ListLabel::print()
     
 
 }
-//dominance rule : return 0 if A > B. return 1 if A < B, else return 2
+
 int ListLabel::dominance (pair <double,double>&  A, pair <double,double>&  B) {
     if (((A.first < B.first)&&(A.second <= B.second)) || ((A.first <= B.first)&&(A.second < B.second)))
         return 0;
         else if (((A.first > B.first)&&(A.second >= B.second)) || ((A.first >= B.first)&&(A.second > B.second)))
            return 1;
-           else return 2;        
+           else return 2;    
 };
-
+//dominance rule for UB2 : return 0 if A > B. return 1 if A < B
+bool ListLabel::dominanceUB2 (pair <double,double>&  A, pair <double,double>&  B) {
+    double costA = max (A.first,A.second);
+    double costB = max(B.first,B.second);
+    if (costA <= costB) 
+        return 1;
+        else return 0;
+   
+       
+};
 void ListLabel::addWithDominance(const int& Listindex, pair <double,double>& L)
 {
     
     bool isDiscard = false;
+   
     for (int i = 0; i < ListOfLabel.at(Listindex).size(); i++)
     {   
         if (dominance(L , ListOfLabel.at(Listindex).at(i)) == 0)
@@ -100,6 +110,28 @@ void ListLabel::addWithDominance(const int& Listindex, pair <double,double>& L)
 
 }
 
+
+void ListLabel::addWithDominanceUB2(const int& Listindex, pair <double,double>& L)
+{
+     bool isDiscard = false;
+    for (int i = 0; i < ListOfLabel.at(Listindex).size(); i++)
+    {   
+        if (dominanceUB2(L , ListOfLabel.at(Listindex).at(i)))
+        {
+            ListOfLabel.at(Listindex).erase(ListOfLabel.at(Listindex).begin() + i);      
+        }  else
+        {
+            isDiscard = true;
+        }
+        
+    }
+
+    if (!isDiscard) 
+    {
+        ListOfLabel.at(Listindex).push_back(L);
+    }
+
+}
 pair <pair<double,double>, int>  ListLabel::findBestLabel()
 {
     int index = ListOfLabel.size() - 1;

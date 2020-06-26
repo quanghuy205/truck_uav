@@ -21,7 +21,7 @@ public:
 	CoordMatrix(void);
 	~CoordMatrix(void);
 
-	void Initialize( std::string filepath );
+	void Initialize( std::string filepath ); 
 
 	double CalcPseudoEuclidDistance( const double& x1,
 		                             const double& x2,
@@ -40,7 +40,9 @@ public:
 	int GetMaxX() const;
 	int GetMaxY() const;
 	void CreateTestCostMatrix();
-	
+	void SetDistanceMatrix();
+	void SetDroneCostMatrix();
+	void SetVehicleCostMatrix();
 	std::string GetFileTitle() const;
 	std::vector< std::pair<double, double> > coords;
 	std::map< std::pair<int,int>, double > distMatrix;
@@ -60,9 +62,7 @@ private:
 				   const std::string& text,  
 				   const std::string& delimiter );  
 
-	void SetDistanceMatrix();
-	void SetDroneCostMatrix();
-	void SetVehicleCostMatrix();
+
 	
 	void Reset();
 };

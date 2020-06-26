@@ -26,8 +26,9 @@ public:
     void addLabel (const int& ListIndex, const pair <double,double> &L);
     
     void addWithDominance(const int& ListIndex, pair <double,double>& L);
+    void addWithDominanceUB2(const int& ListIndex, pair <double,double>& L);
     int dominance (pair <double,double>&  A, pair <double,double>&  B);
-
+    bool dominanceUB2 (pair <double,double>&  A, pair <double,double>&  B);
     void removeLabel(const int & ListIndex, const int& LabelIndex);
     void Reset();
     pair <pair<double,double>, int> findBestLabel();

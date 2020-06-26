@@ -5,19 +5,27 @@
 #include <string>
 #include <vector>
 #include <limits>
+#include <chrono>
+#include <iostream>
 #include "list_customers.h"
 #include "Solution.h"
 #include "Label.h"
 #include "LKMatrix.h"
 #include "LPT.h"
+
+
+
 class TSPalgorithm
 {
 public:
 
+	std::chrono::high_resolution_clock::time_point start, end;
+	std::chrono::duration <double> duration;
+	double ms;
 	CoordMatrix matrix;
 	ListOfCustomers T, T_vehicle, T_drone, T_opt_vehicle;
-	const int n = 5;
-	const int m = 2;
+	int  n;
+	int m;
 	double BestCost;
 	vector <ListOfCustomers> T_opt_drone;
 	vector <vector<int>> T_opt_drone_vect;
@@ -52,6 +60,7 @@ public:
 	void ReOptimizeDrone();
 	void MainAlgorithm();
 	void BestInsertion();
+	void test();
 
 private:
 

@@ -30,7 +30,10 @@ public:
     
     bool check_all_visited(int& n, vector <int> visited);
     int find_nearest_neighbour(int& n, vector <int> visited, int& current_vertex);
-    void GetNearestNeighbourTour();
+    int get_nearest_neighbour_ct(int& n, vector <int> visited, int& current_vertex);
+    std::vector <int> GetNearestNeighbourTour();
+    void CreateNearestNeighbourTour();
+    
     
     
 private:

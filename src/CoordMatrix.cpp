@@ -141,6 +141,22 @@ double CoordMatrix::Distance( const int& c1, const int& c2 )
 		return distMatrix[ p ];
 	}	
 }
+double CoordMatrix::MDistance( const int& c1, const int& c2 )
+{
+	
+	// Ensure node ids in ascending order
+	if ( c1 < c2 ) 
+	{
+		std::pair<int,int> p( c1, c2 );		
+		return ManhattandistMatrix[ p ];
+	}
+	else
+	{
+		std::pair<int,int> p( c2, c1 );
+		return ManhattandistMatrix[ p ];
+	}	
+}
+
 
 
 double CoordMatrix::TestDistance( const int& c1, const int& c2 )
@@ -253,22 +269,25 @@ void CoordMatrix::SetDistanceMatrix()
 
 			// Get Euclidean distance between nodes
 			double dist = 0.0;
+			//Get Manhattan distance between nodes
+			double m_dist = 0.0;
 		//	cout << edge_weight_type;
-			if ( edge_weight_type == ATT )
-			{
-				dist = CalcPseudoEuclidDistance( x1, x2, y1, y2 );
-				//cout << dist << " ";
-			}
-			else
-			{
+		//	if ( edge_weight_type == ATT )
+			// {
+			// 	dist = CalcPseudoEuclidDistance( x1, x2, y1, y2 );
+			// 	//cout << dist << " ";
+			// }
+			// else
+			// {
 				dist =  sqrt( ( x1 - x2 ) * ( x1 - x2 ) +  
 				                      ( y1 - y2 ) * ( y1 - y2 ) );
 			//	cout << dist << " ";
-			}
-
+			// }
+				m_dist = abs(x2-x1) + abs(y2-y1);
+			//	cout << m_dist << " ";
 			// Map the distance to node pair
 			std::pair< int, int > p( i, j );
-			
+			ManhattandistMatrix [ p ] = m_dist; 
 			distMatrix[ p ] = dist;
 		}
 	}
@@ -308,20 +327,22 @@ void CoordMatrix::SetVehicleCostMatrix()
 		{	
 			if ((i != tour_size ) && (j == tour_size  ))
 			{
-				VehicleCost.at(i).at(j) = Distance(i,0);
+				VehicleCost.at(i).at(j) = MDistance(i,0);
 			} else
 			{
 				if ((i == tour_size) && (j != tour_size ))
 				{
-					VehicleCost.at(i).at(j) = Distance(0,j);
+					VehicleCost.at(i).at(j) = MDistance(0,j);
 				} else
 				{
-					VehicleCost.at(i).at(j) = Distance(i,j);
+					VehicleCost.at(i).at(j) = MDistance(i,j);
 				}
 			}	
 				
 		}
 	}
+
+	
 	//print
 	// cout << endl << "VehicleCost";
 	// for (int i = 0; i < tour_size + 1; i++) 
@@ -376,17 +397,3 @@ double CoordMatrix::CalcPseudoEuclidDistance( const double& x1,
 }
 
 
-// Get Euclidean distance between two cities
-double CoordMatrix::MDistance( const int& c1, const int& c2 )
-{
-	std::pair <double,double> p1 = coords.at(c1);
-	std::pair <double,double> p2 = coords.at(c2);
-	
-	double x1 = p1.first;
-	double y1 = p1.second;
-	double x2= p2.first;
-	double y2 = p2.second;
-	
-	return abs(x2-x1) + abs(y2-y1);
-
-}

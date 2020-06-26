@@ -15,3 +15,5 @@ Solution: Stores Solution and Best Solution, each Solution contains:   ListOfCus
   
   
 ListLabel: Stores ListOfLabel for Split Procedure:  vector <vector <pair<double,double>>> ListOfLabel; and attributes and functions.
+
+TSPalgorithm: Main Algorithm.
